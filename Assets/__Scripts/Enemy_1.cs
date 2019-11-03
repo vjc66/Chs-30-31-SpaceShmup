@@ -46,5 +46,5 @@ public class Enemy_1 : Enemy
         // base.Move() still handles the movement down in y 
         base.Move();
         // d 
-       protected BoundsCheck bndCheck;
+    }
 }
