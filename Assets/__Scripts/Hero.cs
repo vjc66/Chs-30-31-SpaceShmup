@@ -23,11 +23,14 @@ public class Hero : MonoBehaviour {
     private GameObject lastTriggerGo = null;
 
 
-    //TODO: Add function delegate declaration
+    // Declare a new delegate type WeaponFireDelegate 
+    public delegate void WeaponFireDelegate();                               // a 
+    // Create a WeaponFireDelegate field named fireDelegate. 
+    public WeaponFireDelegate fireDelegate;
+    
 
 
-
-	void Start()
+    void Start()
     {
         if (S == null)
         {
@@ -62,25 +65,26 @@ public class Hero : MonoBehaviour {
 
 
         if (Input.GetKeyDown(KeyCode.Space))
-        {                          
-            TempFire();                                                   
-        }
-
+        {                         
         //TODO: Replace the TempFire call with the weapon delgate call
         // Use the fireDelegate to fire Weapons
         // First, make sure the button is pressed: Axis("Jump")
         // Then ensure that fireDelegate isn't null to avoid an error
-
-
-
+        if (Input.GetAxis("Jump") == 1 && fireDelegate != null)
+        {            // d 
+            fireDelegate();                                                 // e 
+        }
     }
 
 
+}
 
 
-    //TODO: replace or comment out later
+
+
     void TempFire()
-    {                                                      
+    {
+        {                                                      
         GameObject projGO = Instantiate<GameObject>(projectilePrefab);
 
         projGO.transform.position = transform.position;
@@ -96,7 +100,7 @@ public class Hero : MonoBehaviour {
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         Transform rootT = other.gameObject.transform.root;
         GameObject go = rootT.gameObject;
